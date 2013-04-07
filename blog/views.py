@@ -1,16 +1,12 @@
-from django.template import RequestContext, Context, loader
+from django.template import RequestContext
 from django.shortcuts import render_to_response
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from blog.models import Post
 
 
 def index(request):
-    t = loader.get_template('index.html')
-    c = Context({
-        'number': 7,
-    })
-
-    return HttpResponse(t.render(c))
+    posts = Post.all().order('-created_at')
+    return render_to_response('index.html', {'posts': posts})
 
 
 def create(request):
@@ -22,8 +18,14 @@ def create(request):
                     body=body)
         print post.put()
 
-        return HttpResponseRedirect('/')
+        return HttpResponseRedirect('/post/' + str(post.key().id()))
     else:
         return render_to_response('create.html',
                                   {},
                                   context_instance=RequestContext(request))
+
+
+def details(request, post_id):
+    post = Post.get_by_id(int(post_id))
+
+    return render_to_response('details.html', {'post': post})

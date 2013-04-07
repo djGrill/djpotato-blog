@@ -4,8 +4,9 @@ from blog import views
 
 urlpatterns = patterns(
     '',
-    url(r'^$', views.index, {}, name='home'),
+    url(r'^$', views.index, {}, name='index'),
     url(r'^create/$', views.create, {}, name='create'),
+    url(r'^post/(?P<post_id>\d+)/$', views.details, {}, name='details'),
     # url(r'^__exception_test__/$', views.exception_test, {}),
 )
 

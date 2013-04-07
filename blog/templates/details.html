@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block header %}
+    <h1>djPotato Blog</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="post">
+        <div class="title">{{ post.title }}</div>
+        <div class="created_at">{{ post.created_at }}</div>
+        {% if is_edited %}
+            <div class="updated_at">Edited on {{ post.updated_at }}</div>
+        {% endif %}
+        <div class="body">{{ post.body|safe|linebreaks }}</div>
+    </div>
+{% endblock %}
