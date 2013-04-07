@@ -1,4 +1,4 @@
-application: djappeng1ne
+application: djpotatoblog
 version: 2
 runtime: python27
 api_version: 1
