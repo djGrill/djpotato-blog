@@ -1,5 +1,4 @@
 import os
-import sys
 
 APPENGINE_PRODUCTION = os.getenv('APPENGINE_PRODUCTION')
 
@@ -38,17 +37,15 @@ SESSION_ENGINE = "appengine_sessions.backends.cached_db"
 
 # Uncomment these DB definitions to use Cloud SQL.
 # See: https://developers.google.com/cloud-sql/docs/django#development-settings
-#import os
-#if (os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine') or
-#    os.getenv('SETTINGS_MODE') == 'prod'):
-#    # Running on production App Engine, so use a Google Cloud SQL database.
-#    DATABASES = {
-#        'default': {
-#            'ENGINE': 'google.appengine.ext.django.backends.rdbms',
-#            'INSTANCE': 'my_project:instance1',
-#            'NAME': 'my_db',
-#            }
-#        }
+if (os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine') or os.getenv('SETTINGS_MODE') == 'prod'):
+    # Running on production App Engine, so use a Google Cloud SQL database.
+    DATABASES = {
+        'default': {
+            'ENGINE': 'google.appengine.ext.django.backends.rdbms',
+            'INSTANCE': 'djpotatoblog:instance1',
+            'NAME': 'production',
+        }
+    }
 #else:
 #    # Running in development, so use a local MySQL database.
 #    DATABASES = {
@@ -61,8 +58,6 @@ SESSION_ENGINE = "appengine_sessions.backends.cached_db"
 #            }
 #        }
 
-
-
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -70,7 +65,7 @@ SESSION_ENGINE = "appengine_sessions.backends.cached_db"
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'US/Pacific'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -139,6 +134,7 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'google.appengine.ext.ndb.django_middleware.NdbDjangoMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
