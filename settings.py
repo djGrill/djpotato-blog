@@ -46,14 +46,11 @@ if (os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine') or os.geten
             'NAME': 'production',
         }
     }
-#else:
+# else:
 #    # Running in development, so use a local MySQL database.
 #    DATABASES = {
 #        'default': {
 #            'ENGINE': 'django.db.backends.sqlite3',
-##            'USER': 'root',
-##            'PASSWORD': '',
-##            'HOST': 'localhost',
 #            'NAME': 'my_db',
 #            }
 #        }
@@ -148,6 +145,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    '/home/djgrill/code/django/djappengine/blog/'
 )
 
 INSTALLED_APPS = (

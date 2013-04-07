@@ -1,12 +1,12 @@
-from google.appengine.ext import ndb
+from google.appengine.ext import db
 
 
-class Post(ndb.Model):
-    title = ndb.StringProperty(required=True)
-    body = ndb.StringProperty(required=True)
-    created_at = ndb.DateProperty(auto_now_add=True)
-    updated_at = ndb.DateProperty(auto_now_add=True)
-    active = ndb.BooleanProperty(required=True)
+class Post(db.Model):
+    title = db.StringProperty(required=True)
+    body = db.TextProperty(required=True)
+    created_at = db.DateTimeProperty(auto_now_add=True)
+    updated_at = db.DateTimeProperty(auto_now_add=True)
+    active = db.BooleanProperty(default=True)
 
     def __unicode__(self):
         return self.title
