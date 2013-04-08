@@ -63,9 +63,12 @@ def edit(request, post_id):
     else:
         post = Post.get_by_id(int(post_id))
 
-        return render_to_response('edit.html',
-                                  {'post': post, 'post_id': post_id},
-                                  context_instance=RequestContext(request))
+        if post.active:
+            return render_to_response('edit.html',
+                                      {'post': post, 'post_id': post_id},
+                                      context_instance=RequestContext(request))
+        else:
+            return HttpResponseRedirect('/')
 
 
 def delete(request, post_id):
@@ -78,9 +81,12 @@ def delete(request, post_id):
     else:
         post = Post.get_by_id(int(post_id))
 
-        return render_to_response('delete.html',
-                                  {'post': post, 'post_id': post_id},
-                                  context_instance=RequestContext(request))
+        if post.active:
+            return render_to_response('delete.html',
+                                      {'post': post, 'post_id': post_id},
+                                      context_instance=RequestContext(request))
+        else:
+            return HttpResponseRedirect('/')
 
 
 def archive_year(request, year):
