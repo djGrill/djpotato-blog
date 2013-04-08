@@ -6,7 +6,7 @@
 
 {% block content %}
     <div class="post">
-        <div class="title">{{ post.title }}</div>
+        <h2 class="title">{{ post.title }}</h2>
         <div class="created_at">{{ post.created_at }}</div>
         {% if is_edited %}
             <div class="updated_at">Edited on {{ post.updated_at }}</div>

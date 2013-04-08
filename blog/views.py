@@ -16,7 +16,7 @@ def create(request):
 
         post = Post(title=title,
                     body=body)
-        print post.put()
+        post.put()
 
         return HttpResponseRedirect('/post/' + str(post.key().id()))
     else:
@@ -29,3 +29,22 @@ def details(request, post_id):
     post = Post.get_by_id(int(post_id))
 
     return render_to_response('details.html', {'post': post})
+
+
+def edit(request, post_id):
+    if request.method == 'POST':
+        title = request.POST['title']
+        body = request.POST['body']
+
+        post = Post.get_by_id(int(post_id))
+        post.title = title
+        post.body = body
+        post.put()
+
+        return HttpResponseRedirect('/post/' + str(post.key().id()))
+    else:
+        post = Post.get_by_id(int(post_id))
+
+        return render_to_response('edit.html',
+                                  {'post': post, 'post_id': post_id},
+                                  context_instance=RequestContext(request))
