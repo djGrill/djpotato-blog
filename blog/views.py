@@ -18,7 +18,7 @@ def create(request):
         post.put()
 
         post_id = post.key().id()
-        title_for_url = post.title_for_url
+        title_for_url = post.title_for_url()
         year = post.created_at.year
         month = post.created_at.month
 
@@ -42,9 +42,10 @@ def edit(request, post_id):
         post = Post.get_by_id(int(post_id))
         post.title = title
         post.body = body
+        post.is_edited = True
         post.put()
 
-        title_for_url = post.title_for_url
+        title_for_url = post.title_for_url()
         year = post.created_at.year
         month = post.created_at.month
 

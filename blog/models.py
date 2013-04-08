@@ -18,3 +18,6 @@ class Post(db.Model):
 
     def title_for_url(self):
         return slugify(self.title)
+
+    def created_at_formatted(self):
+        return self.created_at.strftime('%B %d, %Y')

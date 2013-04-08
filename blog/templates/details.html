@@ -1,16 +1,13 @@
 {% extends "base.html" %}
 
 {% block header %}
-    <h1>djPotato Blog</h1>
+    <h1 class="title">djPotato Blog</h1>
 {% endblock %}
 
 {% block content %}
     <div class="post">
         <h2 class="title">{{ post.title }}</h2>
-        <div class="created_at">{{ post.created_at }}</div>
-        {% if is_edited %}
-            <div class="updated_at">Edited on {{ post.updated_at }}</div>
-        {% endif %}
+        <div class="created_at">{{ post.created_at_formatted }}</div>
         <div class="body">{{ post.body|safe|linebreaks }}</div>
     </div>
 {% endblock %}
