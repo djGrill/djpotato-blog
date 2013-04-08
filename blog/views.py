@@ -22,8 +22,9 @@ def create(request):
         title_for_url = post.title_for_url()
         year = post.created_at.year
         month = post.created_at.month
+        redirect_uri = '/' + str(year) + '/' + str(month) + '/' + str(title_for_url) + '/' + str(post_id)
 
-        return HttpResponseRedirect('/' + str(year) + '/' + str(month) + '/' + str(title_for_url) + '/' + str(post_id))
+        return HttpResponseRedirect(redirect_uri)
     else:
         return render_to_response('create.html',
                                   {},
@@ -54,8 +55,9 @@ def edit(request, post_id):
         title_for_url = post.title_for_url()
         year = post.created_at.year
         month = post.created_at.month
+        redirect_uri = '/' + str(year) + '/' + str(month) + '/' + str(title_for_url) + '/' + str(post_id)
 
-        return HttpResponseRedirect('/' + str(year) + '/' + str(month) + '/' + str(title_for_url) + '/' + str(post_id))
+        return HttpResponseRedirect(redirect_uri)
     else:
         post = Post.get_by_id(int(post_id))
 
