@@ -14,36 +14,42 @@
     </head>
 
     <body>
-        <div id="wrapper">
-            <div id="header">
-                <a href="/"><h1 class="title">djPotato Blog</h1></a>
-            </div>
-
-            <div id="content">
-                <div id="left" class="span7">
-                    {% block content %}
-                    {% endblock %}
+        <div id="wrapper_outer">
+            <div id="wrapper">
+                <div id="header">
+                    <a href="/"><h1 class="title">djPotato Blog</h1></a>
                 </div>
 
-                <div id="right" class="span3 pull-right">
-                    {% block sidebar %}
-                        <div id="archive">
-                            <h4 class="title">Archive</h4>
+                <div id="content">
+                    <div class="span7 left">
+                        {% block content %}
+                        {% endblock %}
+                    </div>
 
-                            {% for year, months in archive.items %}
-                                <a href="/{{ year }}/" class="year">{{ year }}</a>
+                    <div class="span3 pull-right right">
+                        {% block sidebar %}
+                            <div class="new-post">
+                                <a href="/create" class="btn btn-danger">New Post</a>
+                            </div>
 
-                                {% for month in months %}
-                                    {% with month|split:"-" as month_values %}
-                                        <a href="/{{ year }}/{{ month_values.0 }}/" class="month">{{ month_values.1 }}</a>
-                                    {% endwith %}
+                            <div id="archive">
+                                <h4 class="title">Archive</h4>
+
+                                {% for year, months in archive.items %}
+                                    <a href="/{{ year }}/" class="year">{{ year }}</a>
+
+                                    {% for month in months %}
+                                        {% with month|split:"-" as month_values %}
+                                            <a href="/{{ year }}/{{ month_values.0 }}/" class="month">{{ month_values.1 }}</a>
+                                        {% endwith %}
+                                    {% endfor %}
                                 {% endfor %}
-                            {% endfor %}
-                        </div>
-                    {% endblock %}
-                </div>
+                            </div>
+                        {% endblock %}
+                    </div>
 
-                <div class="clearfix"></div>
+                    <div class="clearfix"></div>
+                </div>
             </div>
         </div>
     </body>

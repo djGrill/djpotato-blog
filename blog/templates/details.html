@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="post">
-        <h2 class="title">{{ post.title }}</h2>
+        <h2 class="title">{{ post.title }}<a class="edit" href="/edit/{{ post.id }}/"></a></h2>
         <div class="created_at">{{ post.created_at_formatted }}</div>
         <div class="body">{{ post.body|safe|linebreaks }}</div>
     </div>
