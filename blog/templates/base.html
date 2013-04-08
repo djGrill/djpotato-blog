@@ -36,13 +36,22 @@
                                 <h4 class="title">Archive</h4>
 
                                 {% for year, months in archive.items %}
-                                    <a href="/{{ year }}/" class="year">{{ year }}</a>
+                                    <script>
+                                        var year = $("<a href='/{{ year }}/' class='year'>{{ year }}</a>");
+                                    </script>
 
                                     {% for month in months %}
                                         {% with month|split:"-" as month_values %}
-                                            <a href="/{{ year }}/{{ month_values.0 }}/" class="month">{{ month_values.1 }}</a>
+                                            <script>
+                                                var month = $("<a href='/{{ year }}/{{ month_values.0 }}/' class='month'>{{ month_values.1 }}</a>");
+                                                $('#archive .title').after(month);
+                                            </script>
                                         {% endwith %}
                                     {% endfor %}
+
+                                    <script>
+                                        $('#archive .title').after(year);
+                                    </script>
                                 {% endfor %}
                             </div>
                         {% endblock %}
