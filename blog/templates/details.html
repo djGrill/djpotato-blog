@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block title %}
+    <title>{{ post.title }}</title>
+{% endblock %}
+
 {% block content %}
     <div class="post">
         <h2 class="title">{{ post.title }}<a class="action edit" href="/edit/{{ post.id }}/"></a><a href="/delete/{{ post.id }}/" class="action icon-remove"></a></h2>

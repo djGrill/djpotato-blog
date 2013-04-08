@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block title %}
+    <title>New Post</title>
+{% endblock %}
+
 {% block content %}
     <div id="form_create">
         <h2>New Post</h2>
@@ -7,7 +11,7 @@
             {% csrf_token %}
             <input type="text" id="title" name="title" placeholder="Title" required />
             <textarea id="body" name="body" rows="10" placeholder="Content" required></textarea>
-            <a href="/" class="btn pull-right cancel">Cancel</a>
+            <a class="btn pull-right cancel" onclick="history.back()">Cancel</a>
             <input type="submit" class="btn btn-danger pull-right publish" value="Publish" />
             <div class="clearfix"></div>
         </form>
