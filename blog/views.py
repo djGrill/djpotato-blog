@@ -6,7 +6,8 @@ from blog.models import Post
 
 def index(request):
     posts = Post.all().order('-created_at')
-    return render_to_response('index.html', {'posts': posts})
+    archive = build_archive()
+    return render_to_response('index.html', {'posts': posts, 'archive': archive})
 
 
 def create(request):
@@ -31,7 +32,8 @@ def create(request):
 
 def details(request, post_id):
     post = Post.get_by_id(int(post_id))
-    return render_to_response('details.html', {'post': post})
+    archive = build_archive()
+    return render_to_response('details.html', {'post': post, 'archive': archive})
 
 
 def edit(request, post_id):
@@ -66,7 +68,8 @@ def archive_year(request, year):
         if post.created_at.year == int(year):
             posts_filtered.append(post)
 
-    return render_to_response('index.html', {'posts': posts_filtered})
+    archive = build_archive()
+    return render_to_response('index.html', {'posts': posts_filtered, 'archive': archive})
 
 
 def archive_month(request, year, month):
@@ -77,4 +80,22 @@ def archive_month(request, year, month):
         if post.created_at.year == int(year) and post.created_at.month == int(month):
             posts_filtered.append(post)
 
-    return render_to_response('index.html', {'posts': posts_filtered})
+    archive = build_archive()
+    return render_to_response('index.html', {'posts': posts_filtered, 'archive': archive})
+
+
+def build_archive():
+    posts = Post.all().order('-created_at')
+    archive = {}
+
+    for post in posts:
+        year = post.created_at.year
+        month = post.created_at.strftime('%m-%B')
+
+        if year not in archive:
+            archive[year] = []
+
+        if month not in archive[year]:
+            archive[year].append(month)
+
+    return archive

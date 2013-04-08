@@ -1,3 +1,5 @@
+{% load custom_filters %}
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
     <head>
@@ -14,8 +16,7 @@
     <body>
         <div id="wrapper">
             <div id="header">
-                {% block header %}
-                {% endblock %}
+                <a href="/"><h1 class="title">djPotato Blog</h1></a>
             </div>
 
             <div id="content">
@@ -24,8 +25,21 @@
                     {% endblock %}
                 </div>
 
-                <div id="right" class="span4 pull-right">
+                <div id="right" class="span3 pull-right">
                     {% block sidebar %}
+                        <div id="archive">
+                            <h4 class="title">Archive</h4>
+
+                            {% for year, months in archive.items %}
+                                <a href="/{{ year }}/" class="year">{{ year }}</a>
+
+                                {% for month in months %}
+                                    {% with month|split:"-" as month_values %}
+                                        <a href="/{{ year }}/{{ month_values.0 }}/" class="month">{{ month_values.1 }}</a>
+                                    {% endwith %}
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
                     {% endblock %}
                 </div>
 

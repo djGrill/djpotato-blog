@@ -1,13 +1,13 @@
 $fontFamily: Helvetica Neue, Helvetica, Arial, sans-serif
 
 html
-  overflow: hidden
+  overflow-x: hidden
+  overflow-y: auto
 
 body
   background: #ebebeb none no-repeat scroll center center
   font-family: $fontFamily !important
-  overflow-x: hidden
-  overflow-y: scroll
+  overflow: hidden
 
 #wrapper
   width: 840px
@@ -23,6 +23,9 @@ body
   border-top-right-radius: 7px
   background-color: #092e20
 
+  a
+    text-decoration: none
+
   h1.title
     color: white
     margin: 0
@@ -30,8 +33,11 @@ body
 
 #content
   background-color: #fff
+  padding-top: 40px
 
 .post
+  margin-bottom: 25px
+
   a
     text-decoration: none
 
@@ -41,8 +47,7 @@ body
     color: #c61a1a
     font-size: 28px
     line-height: 38px
-    margin-top: 25px
-    margin-bottom: 0
+    margin: 0
 
     &:hover
       color: #e74848
@@ -55,3 +60,14 @@ body
 
   .body
     margin-top: 15px
+
+#archive
+  a
+    display: block
+    color: #c61a1a
+
+  .year
+    font-weight: bold
+
+  .month
+    margin-left: 15px
