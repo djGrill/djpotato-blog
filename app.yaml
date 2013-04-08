@@ -20,9 +20,9 @@ handlers:
   static_dir: blog/assets
   expiration: '1m'
 
-- url: /favicon.ico
-  static_files: favicon.ico
-  upload: favicon.ico
+- url: /favicon.png
+  static_files: favicon.png
+  upload: favicon.png
 
 - url: /appengine_sessions/clean-up/
   script: main.app
