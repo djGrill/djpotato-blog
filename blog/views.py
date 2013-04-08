@@ -18,7 +18,7 @@ def create(request):
         post = Post(title=title, body=body)
         post.put()
 
-        post_id = post.key().id()
+        post_id = post.id()
         title_for_url = post.title_for_url()
         year = post.created_at.year
         month = post.created_at.month
