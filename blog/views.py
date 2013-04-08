@@ -1,6 +1,7 @@
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
+from datetime import datetime
 from blog.models import Post
 
 
@@ -49,6 +50,7 @@ def edit(request, post_id):
         post = Post.get_by_id(int(post_id))
         post.title = title
         post.body = body
+        post.updated_at = datetime.now()
         post.is_edited = True
         post.put()
 
