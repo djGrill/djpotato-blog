@@ -1,7 +1,6 @@
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
-from django.template.defaultfilters import slugify
 from blog.models import Post
 
 
@@ -19,10 +18,11 @@ def create(request):
         post.put()
 
         post_id = post.key().id()
+        title_for_url = post.title_for_url
         year = post.created_at.year
         month = post.created_at.month
 
-        return HttpResponseRedirect('/' + str(year) + '/' + str(month) + '/' + slugify(str(title)) + '/' + str(post_id))
+        return HttpResponseRedirect('/' + str(year) + '/' + str(month) + '/' + str(title_for_url) + '/' + str(post_id))
     else:
         return render_to_response('create.html',
                                   {},
@@ -45,10 +45,11 @@ def edit(request, post_id):
         post.body = body
         post.put()
 
+        title_for_url = post.title_for_url
         year = post.created_at.year
         month = post.created_at.month
 
-        return HttpResponseRedirect('/' + str(year) + '/' + str(month) + '/' + slugify(str(title)) + '/' + str(post_id))
+        return HttpResponseRedirect('/' + str(year) + '/' + str(month) + '/' + str(title_for_url) + '/' + str(post_id))
     else:
         post = Post.get_by_id(int(post_id))
 

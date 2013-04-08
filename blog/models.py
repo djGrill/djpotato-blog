@@ -1,4 +1,5 @@
 from google.appengine.ext import db
+from django.template.defaultfilters import slugify
 
 
 class Post(db.Model):
@@ -11,3 +12,9 @@ class Post(db.Model):
 
     def __unicode__(self):
         return self.title
+
+    def id(self):
+        return self.key().id()
+
+    def title_for_url(self):
+        return slugify(self.title)

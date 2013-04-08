@@ -7,7 +7,7 @@
 {% block content %}
   {% for post in posts %}
       <div class="post">
-          <h2 class="title">{{ post.title }}</h2>
+          <a href="/{{ post.created_at.year }}/{{ post.created_at.month }}/{{ post.title_for_url }}/{{ post.id }}/"><h2 class="title">{{ post.title }}</h2></a>
           <div class="created_at">{{ post.created_at }}</div>
           {% if is_edited %}
               <div class="updated_at">Edited on {{ post.updated_at }}</div>
