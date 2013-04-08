@@ -7,6 +7,8 @@ urlpatterns = patterns(
     url(r'^$', views.index, {}, name='index'),
     url(r'^create/$', views.create, {}, name='create'),
     url(r'^edit/(?P<post_id>\d+)/$', views.edit, {}, name='edit'),
+    url(r'^(?P<year>\d+)/$', views.archive_year, {}, name='archive_year'),
+    url(r'^(?P<year>\d+)/(?P<month>\d+)/$', views.archive_month, {}, name='archive_month'),
     url(r'^\d+/\d+/[\w\-]+/(?P<post_id>\d+)/$', views.details, {}, name='details'),
     # url(r'^__exception_test__/$', views.exception_test, {}),
 )

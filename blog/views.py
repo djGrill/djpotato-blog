@@ -31,7 +31,6 @@ def create(request):
 
 def details(request, post_id):
     post = Post.get_by_id(int(post_id))
-
     return render_to_response('details.html', {'post': post})
 
 
@@ -56,3 +55,25 @@ def edit(request, post_id):
         return render_to_response('edit.html',
                                   {'post': post, 'post_id': post_id},
                                   context_instance=RequestContext(request))
+
+
+def archive_year(request, year):
+    posts = Post.all().order('-created_at')
+    posts_filtered = []
+
+    for post in posts:
+        if post.created_at.year == int(year):
+            posts_filtered.append(post)
+
+    return render_to_response('index.html', {'posts': posts_filtered})
+
+
+def archive_month(request, year, month):
+    posts = Post.all().order('-created_at')
+    posts_filtered = []
+
+    for post in posts:
+        if post.created_at.year == int(year) and post.created_at.month == int(month):
+            posts_filtered.append(post)
+
+    return render_to_response('index.html', {'posts': posts_filtered})
