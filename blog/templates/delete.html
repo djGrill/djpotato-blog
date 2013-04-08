@@ -5,7 +5,7 @@
         <h2>Delete Post</h2>
         <form method="POST" action="/delete/{{ post_id }}/">
             {% csrf_token %}
-            <h3>{{ post.title }}<h3>
+            <h4>{{ post.title }}<h4>
             <a class="btn pull-right cancel" onclick="history.back()">Cancel</a>
             <input type="submit" class="btn btn-danger pull-right publish" value="Confirm" />
             <div class="clearfix"></div>
