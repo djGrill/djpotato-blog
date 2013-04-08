@@ -5,7 +5,7 @@ from blog.models import Post
 
 
 def index(request):
-    posts = Post.all().order('-created_at')
+    posts = Post.all().filter('active', True).order('-created_at')
     archive = build_archive()
     return render_to_response('index.html', {'posts': posts, 'archive': archive})
 
@@ -33,7 +33,11 @@ def create(request):
 def details(request, post_id):
     post = Post.get_by_id(int(post_id))
     archive = build_archive()
-    return render_to_response('details.html', {'post': post, 'archive': archive})
+
+    if post.active:
+        return render_to_response('details.html', {'post': post, 'archive': archive})
+    else:
+        return HttpResponseRedirect('/')
 
 
 def edit(request, post_id):
@@ -60,8 +64,23 @@ def edit(request, post_id):
                                   context_instance=RequestContext(request))
 
 
+def delete(request, post_id):
+    if request.method == 'POST':
+        post = Post.get_by_id(int(post_id))
+        post.active = False
+        post.put()
+
+        return HttpResponseRedirect('/')
+    else:
+        post = Post.get_by_id(int(post_id))
+
+        return render_to_response('delete.html',
+                                  {'post': post, 'post_id': post_id},
+                                  context_instance=RequestContext(request))
+
+
 def archive_year(request, year):
-    posts = Post.all().order('-created_at')
+    posts = Post.all().filter('active', True).order('-created_at')
     posts_filtered = []
 
     for post in posts:
@@ -73,7 +92,7 @@ def archive_year(request, year):
 
 
 def archive_month(request, year, month):
-    posts = Post.all().order('-created_at')
+    posts = Post.all().filter('active', True).order('-created_at')
     posts_filtered = []
 
     for post in posts:
@@ -85,7 +104,7 @@ def archive_month(request, year, month):
 
 
 def build_archive():
-    posts = Post.all().order('-created_at')
+    posts = Post.all().filter('active', True).order('-created_at')
     archive = {}
 
     for post in posts:

@@ -9,6 +9,9 @@ body
   font-family: $fontFamily !important
   overflow: hidden
 
+.btn
+  outline: 0 !important
+
 #wrapper_outer
   background: url(https://twimg0-a.akamaihd.net/a/1346446870/t1/img/wash-white-30.png)
   margin: 0 auto
@@ -31,15 +34,14 @@ body
 
   a
     text-decoration: none
+    color: #fff
 
   h1.title
     font-family: $fontFamily
-    color: white
     font-weight: normal
     letter-spacing: 1px
     margin: 0
     padding: 40px
-
 
 #content
   background-color: #fff
@@ -66,15 +68,20 @@ body
     line-height: 38px
     margin: 0
 
-  .edit
+  .action
     display: inline-block
     margin-left: 10px
-    font-size: 14px
-    background-image: url(/assets/img/fb_icons.png)
-    background-position: -31px -577px
-    background-repeat: no-repeat
     width: 10px
     height: 14px
+
+    &.edit
+      background-image: url(/assets/img/fb_icons.png)
+      background-position: -31px -577px
+      background-repeat: no-repeat
+
+    &.icon-remove
+      width: 14px
+      margin-top: 12px
 
   .created_at
     letter-spacing: 1px

@@ -7,7 +7,7 @@
             {% csrf_token %}
             <input type="text" id="title" name="title" value="{{ post.title }}" required />
             <textarea id="body" name="body" rows="10" required>{{ post.body }}</textarea>
-            <a href="/" class="btn pull-right cancel">Cancel</a>
+            <a class="btn pull-right cancel" onclick="history.back()">Cancel</a>
             <input type="submit" class="btn btn-danger pull-right publish" value="Publish" />
             <div class="clearfix"></div>
         </form>
