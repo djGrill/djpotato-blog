@@ -5,7 +5,7 @@
       <div class="post">
           <h2 class="title"><a href="/{{ post.created_at.year }}/{{ post.created_at.month }}/{{ post.title_for_url }}/{{ post.id }}/">{{ post.title }}</a></h2>
           <div class="created_at">{{ post.created_at_formatted }}</div>
-          <div class="body">{{ post.body|safe|linebreaks }}</div>
+          <div class="body">{{ post.body|escape|linebreaks }}</div>
       </div>
   {% endfor %}
 {% endblock %}
